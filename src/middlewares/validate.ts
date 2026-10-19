@@ -29,6 +29,17 @@ export const validate = (
       req.body = result.data;
     }
 
+    resaveValidatedData(req, part, result.data);
     next();
   };
+};
+
+const resaveValidatedData = (
+  req: Request,
+  part: RequestPart,
+  data: unknown
+): void => {
+  if (part === 'body') {
+    req.body = data;
+  }
 };
