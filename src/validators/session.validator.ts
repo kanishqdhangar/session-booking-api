@@ -44,8 +44,11 @@ export const availableSessionsQuerySchema = z.object({
     .number()
     .finite()
     .int()
-    .min(0)
+    .safe()
+    .min(1)
     .max(8_640_000_000_000_000),
+  page: z.coerce.number().int().min(1).optional(),
+  limit: z.coerce.number().int().min(1).max(100).optional()
 }).strict();
 
 export type AvailableSessionsQuery = z.infer<
